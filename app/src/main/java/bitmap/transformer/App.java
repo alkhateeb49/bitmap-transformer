@@ -3,9 +3,11 @@
  */
 package bitmap.transformer;
 
+import java.io.File;
+import java.util.Arrays;
+
 public class App {
     public static void main(String[] args) {
-
         Bitmap img = new Bitmap("bw","Test1","Test");
         img.transfrom("multiFilter","Test2","Test");
         img.transfrom("Zoom","Test3","Test");

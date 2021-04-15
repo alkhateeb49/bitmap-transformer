@@ -11,12 +11,12 @@ public class Bitmap {
     public int width;
     public BufferedImage imageData;
 
-
     // Constructor
     public Bitmap (String themeName,String targetName,String fileName) {
         transfrom(themeName,targetName,fileName);
     }
     public Bitmap () {
+        Bitmap img = new Bitmap("bw","Test1","Test");
     }
 
     public BufferedImage read(String filePath) {
@@ -36,7 +36,11 @@ public class Bitmap {
 
     public void transfrom(String themeName,String targetName,String fileName){
         try {
+            final File f = new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath());
             String path = "./app/src/main/resources/" + fileName + ".bmp";
+            if (f.compareTo(new File("C:\\Users\\asoom\\Desktop\\bitmap-transformer\\app\\out\\production\\classes")) != 0){
+                path = "./src/main/resources/" + fileName + ".bmp";
+            };
             read(path);
             if (themeName == "bw") {
                 BufferedImage result = new BufferedImage(imageData.getWidth(), imageData.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
@@ -87,8 +91,12 @@ public class Bitmap {
 
 
     public void save(BufferedImage result,String targetName) {
-
-        File output = new File("./app/src/main/resources/"+targetName+".bmp");
+        final File f = new File(App.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String path = "./app/src/main/resources/" + targetName + ".bmp";
+        if (f.compareTo(new File("C:\\Users\\asoom\\Desktop\\bitmap-transformer\\app\\out\\production\\classes")) != 0){
+            path = "./src/main/resources/" + targetName + ".bmp";
+        };
+        File output = new File(path);
         try {
             ImageIO.write(result, "bmp", output);
         } catch (IOException e) {
@@ -96,7 +104,4 @@ public class Bitmap {
             System.out.println(e);
         }
     }
-
-
-
 }
